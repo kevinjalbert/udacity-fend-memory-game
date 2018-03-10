@@ -82,10 +82,9 @@ function initializeGame() {
     setStarsTo(0);
 }
 
-function raiseMoves() {
+function getMoves() {
     movesCounter = document.getElementsByClassName("moves")[0]
-    const currentValue = Number(movesCounter.innerHTML);
-    movesCounter.innerHTML = String(currentValue + 1);
+    return Number(movesCounter.innerHTML)
 }
 
 function setMovesTo(number) {
@@ -107,7 +106,7 @@ function setStarsTo(number) {
 function cardClickHandler(event) {
     const cardElement = event.target;
 
-    raiseMoves();
+    setMovesTo(getMoves() + 1);
     showCard(cardElement);
 
     if (activeCard) {
