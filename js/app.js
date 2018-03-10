@@ -79,7 +79,7 @@ restartButton.addEventListener("click", initializeGame)
 function initializeGame() {
     generateDeck();
     setMovesTo(0);
-    setStarsTo(0);
+    setStarsTo(3);
 }
 
 function getMoves() {
@@ -106,7 +106,6 @@ function setStarsTo(number) {
 function cardClickHandler(event) {
     const cardElement = event.target;
 
-    setMovesTo(getMoves() + 1);
     showCard(cardElement);
 
     if (activeCard) {
@@ -116,9 +115,23 @@ function cardClickHandler(event) {
             cardsNotMatching(cardElement)
         }
 
+        setMovesTo(getMoves() + 1);
+        evaluateStars();
         activeCard = null;
     } else {
         activeCard = cardElement;
+    }
+}
+
+function evaluateStars() {
+    const currentMoves = getMoves();
+
+    if (currentMoves > 15) {
+        setStarsTo(1);
+    } else if (currentMoves > 10) {
+        setStarsTo(2);
+    } else {
+        setStarsTo(3);
     }
 }
 
