@@ -114,6 +114,8 @@ function setStarsTo(number) {
 function cardClickHandler(event) {
     const cardElement = event.target;
 
+    if (cardElement === activeCard) { return }
+
     showCard(cardElement);
 
     if (activeCard) {
