@@ -76,6 +76,7 @@ function shuffle(array) {
 restartButton = document.getElementsByClassName('restart')[0]
 restartButton.addEventListener("click", initializeGame)
 
+const timerIncrement = window.setInterval(increaseTimer, 1000);
 function initializeGame() {
     lockedCards = [];
     activeCard = null;
@@ -83,6 +84,23 @@ function initializeGame() {
     generateDeck();
     setMovesTo(0);
     setStarsTo(3);
+
+    restartTimer();
+}
+
+function increaseTimer() {
+    timerCounter = document.getElementsByClassName("timer")[0]
+    timerCounter.innerHTML = String(getTime() + 1);
+}
+
+function getTime() {
+    timerCounter = document.getElementsByClassName("timer")[0]
+    return Number(timerCounter.innerHTML)
+}
+
+function restartTimer() {
+    timerCounter = document.getElementsByClassName("timer")[0]
+    timerCounter.innerHTML = String(0);
 }
 
 function getMoves() {
@@ -183,9 +201,11 @@ function showWonModal() {
 
     var movesScore = document.getElementById('moves-score');
     var starsScore = document.getElementById('stars-score');
+    var timeScore = document.getElementById('time-score');
 
     movesScore.innerText = getMoves()
     starsScore.innerText = getStars()
+    timeScore.innerText = getTime()
 }
 
 const playAgainButton = document.getElementById("play-again-button");
@@ -194,5 +214,11 @@ playAgainButton.addEventListener("click", function(event) {
     modal.style.display = "none";
     initializeGame();
 });
+
+// TODO: Timer when playing
+
+// TODO: README + Comment Documentation
+
+// TODO: Style Quality check
 
 initializeGame();
