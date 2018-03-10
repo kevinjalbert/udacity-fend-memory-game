@@ -77,8 +77,26 @@ function shuffle(array) {
 restartButton = document.getElementsByClassName('restart')[0]
 restartButton.addEventListener("click", function() {
     generateDeck();
-    // TODO: Reset move/starts
+    setMovesTo(0);
+    setStarsTo(0);
 })
+
+
+function setMovesTo(number) {
+    movesCounter = document.getElementsByClassName("moves")[0]
+    movesCounter.innerHTML = String(number);
+}
+
+function setStarsTo(number) {
+    stars = document.getElementsByClassName("stars")[0]
+    for(var i = 0; i < 3; i++){
+        if (i < number) {
+            stars.children[i].firstElementChild.className = "fa fa-star";
+        } else {
+            stars.children[i].firstElementChild.className = "fa fa-star-o";
+        }
+    }
+}
 
 function cardClickHandler(event) {
     const cardElement = event.target;
@@ -97,7 +115,6 @@ function cardClickHandler(event) {
         activeCard = cardElement;
     }
 }
-
 
 function cardsMatching(cardElement) {
     lockedCards.push(cardElement);
@@ -119,7 +136,6 @@ function hideCard(cardElement) {
     cardElement.classList.remove('open');
     cardElement.classList.remove('show');
 }
-
 
 function isMatchingCard(cardElement) {
     return activeCard.firstChild.className === cardElement.firstChild.className
