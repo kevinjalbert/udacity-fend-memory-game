@@ -14,6 +14,7 @@ const cardTypes = [
 ]
 
 cards = [];
+openCards = [];
 for(var i = 0; i < cardTypes.length; ++i){
   cards.push(cardTypes[i]);
   cards.push(cardTypes[i]);
@@ -41,6 +42,7 @@ function generateDeck() {
 
         // Connect up card elements and attach click handler
         cardElement.appendChild(cardIconElement);
+        cardElement.addEventListener("click", cardClickHandler);
 
         // Add card to deck's DOM
         deck.appendChild(cardElement);
@@ -73,3 +75,15 @@ function shuffle(array) {
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
+function cardClickHandler(event) {
+    const cardElement = event.target;
+
+    cardElement.classList.add('open');
+
+    openCards.push(cardElement);
+    showCardSymbol(cardElement);
+}
+
+function showCardSymbol(cardElement) {
+    cardElement.classList.add('show');
+}
