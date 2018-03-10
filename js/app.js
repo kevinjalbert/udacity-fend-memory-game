@@ -74,6 +74,12 @@ function shuffle(array) {
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
+restartButton = document.getElementsByClassName('restart')[0]
+restartButton.addEventListener("click", function() {
+    generateDeck();
+    // TODO: Reset move/starts
+})
+
 function cardClickHandler(event) {
     const cardElement = event.target;
 
