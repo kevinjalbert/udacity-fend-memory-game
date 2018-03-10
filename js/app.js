@@ -168,6 +168,7 @@ function evaluateStars() {
 
 function cardsMatching(cardElement) {
     lockedCards.push(cardElement);
+    lockedCards.push(activeCard);
     cardElement.classList.add("match");
     activeCard.classList.add("match");
 }
