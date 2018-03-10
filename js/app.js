@@ -77,7 +77,7 @@ function shuffle(array) {
 function cardClickHandler(event) {
     const cardElement = event.target;
 
-    showCardSymbol(cardElement);
+    showCard(cardElement);
 
     if (activeCard) {
         if (isMatchingCard(cardElement)) {
@@ -85,19 +85,13 @@ function cardClickHandler(event) {
         } else {
             cardsNotMatching(cardElement)
         }
+
+        activeCard = null;
     } else {
         activeCard = cardElement;
     }
 }
 
-function showCardSymbol(cardElement) {
-    cardElement.classList.add('open');
-    cardElement.classList.add('show');
-}
-
-function hideCardSymbol(cardElement) {
-    cardElement.classList.remove('show');
-}
 
 function cardsMatching(cardElement) {
     lockedCards.push(cardElement);
@@ -106,14 +100,20 @@ function cardsMatching(cardElement) {
 }
 
 function cardsNotMatching(cardElement) {
-    cardElement.classList.remove("open");
-    activeCard.classList.remove("open");
-
-    hideCardSymbol(cardElement);
-    hideCardSymbol(activeCard);
-
-    activeCard = null;
+    window.setTimeout(hideCard.bind(this, cardElement), 500);
+    window.setTimeout(hideCard.bind(this, activeCard), 500);
 }
+
+function showCard(cardElement) {
+    cardElement.classList.add('open');
+    cardElement.classList.add('show');
+}
+
+function hideCard(cardElement) {
+    cardElement.classList.remove('open');
+    cardElement.classList.remove('show');
+}
+
 
 function isMatchingCard(cardElement) {
     return activeCard.firstChild.className === cardElement.firstChild.className
