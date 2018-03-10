@@ -51,7 +51,6 @@ function generateDeck() {
         deck.appendChild(cardElement);
     }
 }
-generateDeck();
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -75,11 +74,13 @@ function shuffle(array) {
  */
 
 restartButton = document.getElementsByClassName('restart')[0]
-restartButton.addEventListener("click", function() {
+restartButton.addEventListener("click", initializeGame)
+
+function initializeGame() {
     generateDeck();
     setMovesTo(0);
     setStarsTo(0);
-})
+}
 
 function raiseMoves() {
     movesCounter = document.getElementsByClassName("moves")[0]
@@ -146,3 +147,5 @@ function hideCard(cardElement) {
 function isMatchingCard(cardElement) {
     return activeCard.firstChild.className === cardElement.firstChild.className
 }
+
+initializeGame();
