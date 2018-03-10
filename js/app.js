@@ -13,16 +13,19 @@ const cardTypes = [
     'paper-plane'
 ]
 
-cards = [];
-openCards = [];
+cards = []; // Set of all cards
+lockedCards = []; // The opened/locked matching set of cards
+activeCard = null // The currently flipped/active card
+
+// Generate a pair for each card type to put in our cards list
 for(var i = 0; i < cardTypes.length; ++i){
   cards.push(cardTypes[i]);
   cards.push(cardTypes[i]);
 }
 
-const deck = document.getElementsByClassName('deck')[0];
-
 function generateDeck() {
+    const deck = document.getElementsByClassName('deck')[0];
+
     // Clear out cards in deck in DOM
     while (deck.firstChild) {
         deck.removeChild(deck.firstChild);
@@ -67,23 +70,51 @@ function shuffle(array) {
 
 /*
  * set up the event listener for a card. If a card is clicked:
- *  - display the card's symbol (put this functionality in another function that you call from this one)
- *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
- *  - if the list already has another card, check to see if the two cards match
- *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
+
 function cardClickHandler(event) {
     const cardElement = event.target;
 
-    cardElement.classList.add('open');
-
-    openCards.push(cardElement);
     showCardSymbol(cardElement);
+
+    if (activeCard) {
+        if (isMatchingCard(cardElement)) {
+            cardsMatching(cardElement)
+        } else {
+            cardsNotMatching(cardElement)
+        }
+    } else {
+        activeCard = cardElement;
+    }
 }
 
 function showCardSymbol(cardElement) {
+    cardElement.classList.add('open');
     cardElement.classList.add('show');
+}
+
+function hideCardSymbol(cardElement) {
+    cardElement.classList.remove('show');
+}
+
+function cardsMatching(cardElement) {
+    lockedCards.push(cardElement);
+    cardElement.classList.add("match");
+    activeCard.classList.add("match");
+}
+
+function cardsNotMatching(cardElement) {
+    cardElement.classList.remove("open");
+    activeCard.classList.remove("open");
+
+    hideCardSymbol(cardElement);
+    hideCardSymbol(activeCard);
+
+    activeCard = null;
+}
+
+function isMatchingCard(cardElement) {
+    return activeCard.firstChild.className === cardElement.firstChild.className
 }
