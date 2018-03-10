@@ -2,13 +2,51 @@
  * Create a list that holds all of your cards
  */
 
+const cardTypes = [
+    'diamond',
+    'anchor',
+    'cube',
+    'leaf',
+    'bomb',
+    'bolt',
+    'bicycle',
+    'paper-plane'
+]
 
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
+cards = [];
+for(var i = 0; i < cardTypes.length; ++i){
+  cards.push(cardTypes[i]);
+  cards.push(cardTypes[i]);
+}
+
+const deck = document.getElementsByClassName('deck')[0];
+
+function generateDeck() {
+    // Clear out cards in deck in DOM
+    while (deck.firstChild) {
+        deck.removeChild(deck.firstChild);
+    }
+
+    // Shuffle cards
+    const shuffledCards = shuffle(cards)
+
+    // Add shuffled cards to DOM
+    for (var card of shuffledCards){
+
+        // Create card DOM elements
+        cardElement = document.createElement('li');
+        cardElement.classList.add('card');
+        cardIconElement = document.createElement('i');
+        cardIconElement.classList.add('fa', 'fa-' + card);
+
+        // Connect up card elements and attach click handler
+        cardElement.appendChild(cardIconElement);
+
+        // Add card to deck's DOM
+        deck.appendChild(cardElement);
+    }
+}
+generateDeck();
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -24,7 +62,6 @@ function shuffle(array) {
 
     return array;
 }
-
 
 /*
  * set up the event listener for a card. If a card is clicked:
