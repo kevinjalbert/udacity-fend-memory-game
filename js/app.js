@@ -81,6 +81,11 @@ restartButton.addEventListener("click", function() {
     setStarsTo(0);
 })
 
+function raiseMoves() {
+    movesCounter = document.getElementsByClassName("moves")[0]
+    const currentValue = Number(movesCounter.innerHTML);
+    movesCounter.innerHTML = String(currentValue + 1);
+}
 
 function setMovesTo(number) {
     movesCounter = document.getElementsByClassName("moves")[0]
@@ -101,6 +106,7 @@ function setStarsTo(number) {
 function cardClickHandler(event) {
     const cardElement = event.target;
 
+    raiseMoves();
     showCard(cardElement);
 
     if (activeCard) {
