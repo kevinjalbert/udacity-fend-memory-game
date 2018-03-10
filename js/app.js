@@ -77,6 +77,9 @@ restartButton = document.getElementsByClassName('restart')[0]
 restartButton.addEventListener("click", initializeGame)
 
 function initializeGame() {
+    lockedCards = [];
+    activeCard = null;
+
     generateDeck();
     setMovesTo(0);
     setStarsTo(3);
@@ -92,8 +95,13 @@ function setMovesTo(number) {
     movesCounter.innerHTML = String(number);
 }
 
+function getStars() {
+    const stars = document.getElementsByClassName("stars")[0]
+    return stars.getElementsByClassName("fa-star").length
+}
+
 function setStarsTo(number) {
-    stars = document.getElementsByClassName("stars")[0]
+    const stars = document.getElementsByClassName("stars")[0]
     for(var i = 0; i < 3; i++){
         if (i < number) {
             stars.children[i].firstElementChild.className = "fa fa-star";
@@ -117,6 +125,9 @@ function cardClickHandler(event) {
 
         setMovesTo(getMoves() + 1);
         evaluateStars();
+
+        if (isGameWon()) { showWonModal() };
+
         activeCard = null;
     } else {
         activeCard = cardElement;
@@ -159,5 +170,27 @@ function hideCard(cardElement) {
 function isMatchingCard(cardElement) {
     return activeCard.firstChild.className === cardElement.firstChild.className
 }
+
+function isGameWon() {
+    return lockedCards.length === cards.length
+}
+
+function showWonModal() {
+    var modal = document.getElementById('modal');
+    modal.style.display = "block";
+
+    var movesScore = document.getElementById('moves-score');
+    var starsScore = document.getElementById('stars-score');
+
+    movesScore.innerText = getMoves()
+    starsScore.innerText = getStars()
+}
+
+const playAgainButton = document.getElementById("play-again-button");
+playAgainButton.addEventListener("click", function(event) {
+    var modal = document.getElementById('modal');
+    modal.style.display = "none";
+    initializeGame();
+});
 
 initializeGame();
