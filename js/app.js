@@ -45,7 +45,7 @@ function generateDeck() {
 
         // Connect up card elements and attach click handler
         cardElement.appendChild(cardIconElement);
-        cardElement.addEventListener("click", cardClickHandler);
+        cardElement.addEventListener('click', cardClickHandler);
 
         // Add card to deck's DOM
         deck.appendChild(cardElement);
@@ -74,7 +74,7 @@ function shuffle(array) {
  */
 
 restartButton = document.getElementsByClassName('restart')[0];
-restartButton.addEventListener("click", initializeGame);
+restartButton.addEventListener('click', initializeGame);
 
 const timerIncrement = window.setInterval(increaseTimer, 1000);
 function initializeGame() {
@@ -89,42 +89,42 @@ function initializeGame() {
 }
 
 function increaseTimer() {
-    timerCounter = document.getElementsByClassName("timer")[0];
+    timerCounter = document.getElementsByClassName('timer')[0];
     timerCounter.innerHTML = String(getTime() + 1);
 }
 
 function getTime() {
-    timerCounter = document.getElementsByClassName("timer")[0];
+    timerCounter = document.getElementsByClassName('timer')[0];
     return Number(timerCounter.innerHTML);
 }
 
 function restartTimer() {
-    timerCounter = document.getElementsByClassName("timer")[0];
+    timerCounter = document.getElementsByClassName('timer')[0];
     timerCounter.innerHTML = String(0);
 }
 
 function getMoves() {
-    movesCounter = document.getElementsByClassName("moves")[0];
+    movesCounter = document.getElementsByClassName('moves')[0];
     return Number(movesCounter.innerHTML);
 }
 
 function setMovesTo(number) {
-    movesCounter = document.getElementsByClassName("moves")[0];
+    movesCounter = document.getElementsByClassName('moves')[0];
     movesCounter.innerHTML = String(number);
 }
 
 function getStars() {
-    const stars = document.getElementsByClassName("stars")[0];
-    return stars.getElementsByClassName("fa-star").length;
+    const stars = document.getElementsByClassName('stars')[0];
+    return stars.getElementsByClassName('fa-star').length;
 }
 
 function setStarsTo(number) {
-    const stars = document.getElementsByClassName("stars")[0];
+    const stars = document.getElementsByClassName('stars')[0];
     for(var i = 0; i < 3; i++){
         if (i < number) {
-            stars.children[i].firstElementChild.className = "fa fa-star";
+            stars.children[i].firstElementChild.className = 'fa fa-star';
         } else {
-            stars.children[i].firstElementChild.className = "fa fa-star-o";
+            stars.children[i].firstElementChild.className = 'fa fa-star-o';
         }
     }
 }
@@ -132,7 +132,7 @@ function setStarsTo(number) {
 function cardClickHandler(event) {
     var cardElement = event.target;
 
-    if (!cardElement.classList.contains("card")) {
+    if (!cardElement.classList.contains('card')) {
         cardElement = cardElement.parentNode;
     }
 
@@ -173,8 +173,8 @@ function evaluateStars() {
 function cardsMatching(cardElement) {
     lockedCards.push(cardElement);
     lockedCards.push(activeCard);
-    cardElement.classList.add("match");
-    activeCard.classList.add("match");
+    cardElement.classList.add('match');
+    activeCard.classList.add('match');
 }
 
 function cardsNotMatching(cardElement) {
@@ -202,7 +202,7 @@ function isGameWon() {
 
 function showWonModal() {
     var modal = document.getElementById('modal');
-    modal.style.display = "block";
+    modal.style.display = 'block';
 
     var movesScore = document.getElementById('moves-score');
     var starsScore = document.getElementById('stars-score');
@@ -213,10 +213,10 @@ function showWonModal() {
     timeScore.innerText = getTime();
 }
 
-const playAgainButton = document.getElementById("play-again-button");
-playAgainButton.addEventListener("click", function(event) {
+const playAgainButton = document.getElementById('play-again-button');
+playAgainButton.addEventListener('click', function(event) {
     var modal = document.getElementById('modal');
-    modal.style.display = "none";
+    modal.style.display = 'none';
     initializeGame();
 });
 
