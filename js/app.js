@@ -18,7 +18,7 @@ lockedCards = []; // The opened/locked matching set of cards
 activeCard = null; // The currently flipped/active card
 
 // Generate a pair for each card type to put in our cards list
-for(var i = 0; i < cardTypes.length; ++i){
+for(let i = 0; i < cardTypes.length; ++i){
   cards.push(cardTypes[i]);
   cards.push(cardTypes[i]);
 }
@@ -35,7 +35,7 @@ function generateDeck() {
     const shuffledCards = shuffle(cards);
 
     // Add shuffled cards to DOM
-    for (var card of shuffledCards){
+    for (let card of shuffledCards){
 
         // Create card DOM elements
         cardElement = document.createElement('li');
@@ -54,7 +54,7 @@ function generateDeck() {
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
+    let currentIndex = array.length, temporaryValue, randomIndex;
 
     while (currentIndex !== 0) {
         randomIndex = Math.floor(Math.random() * currentIndex);
@@ -120,7 +120,7 @@ function getStars() {
 
 function setStarsTo(number) {
     const stars = document.getElementsByClassName('stars')[0];
-    for(var i = 0; i < 3; i++){
+    for(let i = 0; i < 3; i++){
         if (i < number) {
             stars.children[i].firstElementChild.className = 'fa fa-star';
         } else {
@@ -130,7 +130,7 @@ function setStarsTo(number) {
 }
 
 function cardClickHandler(event) {
-    var cardElement = event.target;
+    let cardElement = event.target;
 
     if (!cardElement.classList.contains('card')) {
         cardElement = cardElement.parentNode;
@@ -201,12 +201,12 @@ function isGameWon() {
 }
 
 function showWonModal() {
-    var modal = document.getElementById('modal');
+    let modal = document.getElementById('modal');
     modal.style.display = 'block';
 
-    var movesScore = document.getElementById('moves-score');
-    var starsScore = document.getElementById('stars-score');
-    var timeScore = document.getElementById('time-score');
+    let movesScore = document.getElementById('moves-score');
+    let starsScore = document.getElementById('stars-score');
+    let timeScore = document.getElementById('time-score');
 
     movesScore.innerText = getMoves();
     starsScore.innerText = getStars();
@@ -215,7 +215,7 @@ function showWonModal() {
 
 const playAgainButton = document.getElementById('play-again-button');
 playAgainButton.addEventListener('click', function(event) {
-    var modal = document.getElementById('modal');
+    let modal = document.getElementById('modal');
     modal.style.display = 'none';
     initializeGame();
 });
