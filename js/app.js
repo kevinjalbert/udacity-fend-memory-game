@@ -11,11 +11,11 @@ const cardTypes = [
     'bolt',
     'bicycle',
     'paper-plane'
-]
+];
 
 cards = []; // Set of all cards
 lockedCards = []; // The opened/locked matching set of cards
-activeCard = null // The currently flipped/active card
+activeCard = null; // The currently flipped/active card
 
 // Generate a pair for each card type to put in our cards list
 for(var i = 0; i < cardTypes.length; ++i){
@@ -32,7 +32,7 @@ function generateDeck() {
     }
 
     // Shuffle cards
-    const shuffledCards = shuffle(cards)
+    const shuffledCards = shuffle(cards);
 
     // Add shuffled cards to DOM
     for (var card of shuffledCards){
@@ -73,8 +73,8 @@ function shuffle(array) {
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
-restartButton = document.getElementsByClassName('restart')[0]
-restartButton.addEventListener("click", initializeGame)
+restartButton = document.getElementsByClassName('restart')[0];
+restartButton.addEventListener("click", initializeGame);
 
 const timerIncrement = window.setInterval(increaseTimer, 1000);
 function initializeGame() {
@@ -89,37 +89,37 @@ function initializeGame() {
 }
 
 function increaseTimer() {
-    timerCounter = document.getElementsByClassName("timer")[0]
+    timerCounter = document.getElementsByClassName("timer")[0];
     timerCounter.innerHTML = String(getTime() + 1);
 }
 
 function getTime() {
-    timerCounter = document.getElementsByClassName("timer")[0]
-    return Number(timerCounter.innerHTML)
+    timerCounter = document.getElementsByClassName("timer")[0];
+    return Number(timerCounter.innerHTML);
 }
 
 function restartTimer() {
-    timerCounter = document.getElementsByClassName("timer")[0]
+    timerCounter = document.getElementsByClassName("timer")[0];
     timerCounter.innerHTML = String(0);
 }
 
 function getMoves() {
-    movesCounter = document.getElementsByClassName("moves")[0]
-    return Number(movesCounter.innerHTML)
+    movesCounter = document.getElementsByClassName("moves")[0];
+    return Number(movesCounter.innerHTML);
 }
 
 function setMovesTo(number) {
-    movesCounter = document.getElementsByClassName("moves")[0]
+    movesCounter = document.getElementsByClassName("moves")[0];
     movesCounter.innerHTML = String(number);
 }
 
 function getStars() {
-    const stars = document.getElementsByClassName("stars")[0]
-    return stars.getElementsByClassName("fa-star").length
+    const stars = document.getElementsByClassName("stars")[0];
+    return stars.getElementsByClassName("fa-star").length;
 }
 
 function setStarsTo(number) {
-    const stars = document.getElementsByClassName("stars")[0]
+    const stars = document.getElementsByClassName("stars")[0];
     for(var i = 0; i < 3; i++){
         if (i < number) {
             stars.children[i].firstElementChild.className = "fa fa-star";
@@ -142,9 +142,9 @@ function cardClickHandler(event) {
 
     if (activeCard) {
         if (isMatchingCard(cardElement)) {
-            cardsMatching(cardElement)
+            cardsMatching(cardElement);
         } else {
-            cardsNotMatching(cardElement)
+            cardsNotMatching(cardElement);
         }
 
         setMovesTo(getMoves() + 1);
@@ -193,11 +193,11 @@ function hideCard(cardElement) {
 }
 
 function isMatchingCard(cardElement) {
-    return activeCard.firstChild.className === cardElement.firstChild.className
+    return activeCard.firstChild.className === cardElement.firstChild.className;
 }
 
 function isGameWon() {
-    return lockedCards.length === cards.length
+    return lockedCards.length === cards.length;
 }
 
 function showWonModal() {
@@ -208,9 +208,9 @@ function showWonModal() {
     var starsScore = document.getElementById('stars-score');
     var timeScore = document.getElementById('time-score');
 
-    movesScore.innerText = getMoves()
-    starsScore.innerText = getStars()
-    timeScore.innerText = getTime()
+    movesScore.innerText = getMoves();
+    starsScore.innerText = getStars();
+    timeScore.innerText = getTime();
 }
 
 const playAgainButton = document.getElementById("play-again-button");
@@ -220,10 +220,6 @@ playAgainButton.addEventListener("click", function(event) {
     initializeGame();
 });
 
-// TODO: Timer when playing
-
 // TODO: README + Comment Documentation
-
-// TODO: Style Quality check
 
 initializeGame();
