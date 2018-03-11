@@ -130,7 +130,11 @@ function setStarsTo(number) {
 }
 
 function cardClickHandler(event) {
-    const cardElement = event.target;
+    var cardElement = event.target;
+
+    if (!cardElement.classList.contains("card")) {
+        cardElement = cardElement.parentNode;
+    }
 
     if (cardElement === activeCard) { return }
 
