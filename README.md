@@ -1,20 +1,17 @@
 # Memory Game Project
 
-## Table of Contents
+A fun matching game!
 
-* [Instructions](#instructions)
-* [Contributing](#contributing)
+## Rules
 
-## Instructions
+You have 16 cards that you must match up. There are 8 card types.
 
-The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
+A move counts every time you attempt to match cards up.
 
-To get started, open `js/app.js` and start building out the app's functionality
+You lose a star rating after 10 moves and another after 15 moves.
 
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
+## Winning
 
-## Contributing
+When you match up all the cards, you will see a victory screen.
 
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
-
-For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
+Your stats are printed here, and you can restart the game.
