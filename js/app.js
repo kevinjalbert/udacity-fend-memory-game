@@ -74,6 +74,7 @@ function initializeGame() {
     setStarsTo(3);
 
     restartTimer();
+    stopTimer();
 }
 
 // Identify restart button and attach the initializeGame function to it
@@ -82,6 +83,8 @@ restartButton.addEventListener('click', initializeGame);
 
 function cardClickHandler(event) {
     let cardElement = event.target;
+
+    startTimer();
 
     // Sometimes the target was the inner 'i' element (icon), so lets jump up
     // to the parent node (the card)
@@ -114,25 +117,42 @@ function cardClickHandler(event) {
 
 
 /* -- Timer Functionality Start -- */
-// Increase the timer's rendered text by one
-function increaseTimer() {
-    timerCounter = document.getElementsByClassName('timer')[0];
-    timerCounter.innerHTML = String(getTime() + 1);
+// Holds our timer interval increaser
+let timerIncrement = null
+
+// Starts the timer only if its not running
+function startTimer() {
+    if (timerIncrement) { return; }
+
+    timerIncrement = window.setInterval(increaseTimer, 1000);
 }
 
-// Creates an interval timer for 1 seconds to increase the timer's DOM value
-const timerIncrement = window.setInterval(increaseTimer, 1000);
-
-// Get the timer's value
-function getTime() {
-    timerCounter = document.getElementsByClassName('timer')[0];
-    return Number(timerCounter.innerHTML);
+// Stop the timer from increasing (clear out the interval)
+function stopTimer() {
+    window.clearInterval(timerIncrement);
+    timerIncrement = null;
 }
 
 // Restart the timer -- back to 0
 function restartTimer() {
     timerCounter = document.getElementsByClassName('timer')[0];
     timerCounter.innerHTML = String(0);
+}
+
+// Get the timer's value
+function getTime() {
+    if (!timerIncrement) { return 0; }
+
+    timerCounter = document.getElementsByClassName('timer')[0];
+    return Number(timerCounter.innerHTML);
+}
+
+// Increase the timer's rendered text by one
+function increaseTimer() {
+    if (!timerIncrement) { return; }
+
+    timerCounter = document.getElementsByClassName('timer')[0];
+    timerCounter.innerHTML = String(getTime() + 1);
 }
 /* -- Timer Functionality End -- */
 
@@ -245,6 +265,8 @@ function showWonModal() {
     movesScore.innerText = getMoves();
     starsScore.innerText = getStars();
     timeScore.innerText = getTime();
+
+    stopTimer();
 }
 
 // Connect the play again button with a click handler than re-initializes the
